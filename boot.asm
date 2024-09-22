@@ -44,8 +44,8 @@ mov bl, [31747+20]
 cmp al, bl 
 JNL p1getsallocated
 cmp al, bl 
-JL p3getsallocated
-jmp end1
+JL p31getsallocated
+
 
 comparep2andp3:
 mov al, [31747+10]
@@ -53,8 +53,8 @@ mov bl, [31747+20]
 cmp al, bl 
 JNL p2getsallocated
 cmp al, bl 
-JL p3getsallocated
-jmp end1
+JL p32getsallocated
+
 
 
 p1getsallocated:
@@ -64,6 +64,7 @@ mov byte [31747+31], al
 mov al, [31747+32]
 inc al
 mov byte [31747+32], al
+jmp comparep2andp3
 
 p2getsallocated:
 mov al, [31747+30]
@@ -72,14 +73,25 @@ mov byte [31747+30], al
 mov al, [31747+32]
 inc al
 mov byte [31747+32], al
+jmp comparep1andp3
 
-p3getsallocated:
+p31getsallocated:
 mov al, [31747+30]
 inc al
 mov byte [31747+30], al
 mov al, [31747+31]
 inc al
 mov byte [31747+31], al
+jmp comparep2andp3
+
+p32getsallocated:
+mov al, [31747+30]
+inc al
+mov byte [31747+30], al
+mov al, [31747+31]
+inc al
+mov byte [31747+31], al
+jmp comparep1andp3
 
 times 510-($-$$) db 0
 dw 0xaa55
